@@ -12,3 +12,21 @@ we have have three layers bronze silver gold layers . I will be working on that 
 ###  About this layer 
 
 => 1. Before building anything we analyze it. We understand the source system then we ask question about the source of the data from it was coming. then we do data ingestion all the coding part  take all the unprocessed data from the source system to the warehouse . then we do the schema checks data validation . After this we do git versioning .
+
+====
+As in first step 
+====
+
+ 1> We start with discussion with the source team asking them the right question About the source . Asking the right question about the source system is the crucial part . Question like 
+
+ ===> Business Context and ownership 
+ Q1. Who owns the data? , Q2 What business process it support?, Q3 System and Data Documentation? , Q4 Data Model and Data Catalog? 
+
+ ===> Architecture and technology stack 
+ Q1 How is data stored? (SQL server , Azure , AWS , Oracle) , Q2 What are the integration Condition ? (API Kafka , Direct db) , 
+
+ ===> Extract and load 
+ Q1 Incremental and full Load ?  Q2 Data scope and historical need? , Q3 What is the expected size of the extracts? , Q4 Are there any  data volume limitation ? , Q5 How to avoid impacting the source system performance ? , Q6 Authentication and Authorization (tokens , ssh , keys VPN , IP Whitelisting) 
+
+
+ 
