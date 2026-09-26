@@ -1,3 +1,9 @@
+=======
+Here I worked on bronze layer in etl
+======
+
+
+
 USE bronze;
 
 DROP TABLE IF EXISTS crm_cust_info;
