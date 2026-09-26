@@ -34,3 +34,8 @@ we have have three layers bronze silver gold layers . I will be working on that 
 ==> After writing all the ddl commands we init the bronze layer load the unprocessed data ; 
 
  
+<img width="30" height="30" alt="image" src="https://github.com/user-attachments/assets/b4b8c48a-5bcb-4b06-a26e-c9489915f1b7" /> Silver Layer
+
+### About this layer 
+
+Here in this the process start with understanding the data and exploring the data after that we clean the data we check quality of bronze. After this we check the data correctness. After this we do data versioning and commenting .
