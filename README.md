@@ -30,4 +30,7 @@ As in first step
 
 => after that  we start defining the table in bronze layer and then we do the bulk defining. Basically the bulk insert means we upload the massive amount the data directly from the .csv and .txt files into the database . 
 
+
+==> After writing all the ddl commands we init the bronze layer load the unprocessed data ; 
+
  
