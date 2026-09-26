@@ -28,5 +28,6 @@ As in first step
  ===> Extract and load 
  Q1 Incremental and full Load ?  Q2 Data scope and historical need? , Q3 What is the expected size of the extracts? , Q4 Are there any  data volume limitation ? , Q5 How to avoid impacting the source system performance ? , Q6 Authentication and Authorization (tokens , ssh , keys VPN , IP Whitelisting) 
 
+=> after that  we start defining the table in bronze layer and then we do the bulk defining. Basically the bulk insert means we upload the massive amount the data directly from the .csv and .txt files into the database . 
 
  
