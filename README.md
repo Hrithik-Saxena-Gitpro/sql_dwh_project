@@ -13,9 +13,9 @@ we have have three layers bronze silver gold layers . I will be working on that 
 
 => 1. Before building anything we analyze it. We understand the source system then we ask question about the source of the data from it was coming. then we do data ingestion all the coding part  take all the unprocessed data from the source system to the warehouse . then we do the schema checks data validation . After this we do git versioning .
 
-====
-As in first step 
-====
+
+## As in first step 
+
 
  1> We start with discussion with the source team asking them the right question About the source . Asking the right question about the source system is the crucial part . Question like 
 
