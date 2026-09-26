@@ -1,0 +1,21 @@
+/* 
+
+=====================================
+Here in this file i am putting the creation of database and schema as per this project is being build in mysql
+=====================================
+
+=====
+What this code do
+=====
+
+Basically this code create a database name DataWareHouse and Three Schema . bronze, silver, gold = Which is the essiantail part of medallion architechture.
+
+
+*/
+CREATE DATABASE DataWareHouse;
+USE DataWareHouse;
+
+CREATE SCHEMA bronze;
+CREATE SCHEMA silver;
+CREATE  SCHEMA gold;
+
