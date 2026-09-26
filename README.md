@@ -41,4 +41,5 @@ we have have three layers bronze silver gold layers . I will be working on that 
 Here in this the process start with understanding the data and exploring the data after that we clean the data we check quality of bronze. After this we check the data correctness. After this we do data versioning and commenting .
 
 ===> First we make the integration model Checking how the tables are related and matching the columns to the related columns.
+
 ===> after this we clean and load it is important because before transformation we need to clean it.
