@@ -46,4 +46,5 @@ Here in this the process start with understanding the data and exploring the dat
 ===> Then we go with quality check procedure like checking the null values in primary key we check the duplicates in our data 
 ===> After this we see for unwanted spaces in the data. By using the trim function.
 ===> Check the consistency of value in low cardinality columns. 
+===> After this we check for standardization and consistency. 
 
