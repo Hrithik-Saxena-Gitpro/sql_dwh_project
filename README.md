@@ -43,3 +43,5 @@ Here in this the process start with understanding the data and exploring the dat
 ===> First we make the integration model Checking how the tables are related and matching the columns to the related columns.
 
 ===> after this we clean and load it is important because before transformation we need to clean it.
+===> Then we go with quality check procedure like checking the null values in primary key we check the duplicates in our data 
+
