@@ -1,80 +1,199 @@
+-- ============================================================
+-- RESET + CREATE + LOAD BRONZE LAYER
+-- ============================================================
+USE bronze;
+-- ============================================================
+-- 1. CRM CUSTOMER
+-- ============================================================
+DROP TABLE crm_cust_info;
+CREATE TABLE bronze.crm_cust_info (
+    cst_id              INT,
+    cst_key             VARCHAR(50),
+    cst_firstname       VARCHAR(50),
+    cst_lastname        VARCHAR(50),
+    cst_marital_status  VARCHAR(50),
+    cst_gndr            VARCHAR(50),
+    cst_create_date     DATE
+);
 
-DROP PROCEDURE IF EXISTS load_data;
 
-DELIMITER $$
+-- ============================================================
+-- 2. CRM PRODUCT
+-- ============================================================
+DROP TABLE crm_prd_info;
+CREATE TABLE bronze.crm_prd_info (
+    prd_id        INT,
+    prd_key       VARCHAR(50),
+    prd_nm        VARCHAR(50),
+    prd_cost      INT,
+    prd_line      VARCHAR(50),
+    prd_start_dt  DATE,
+    prd_end_dt    DATE
+);
 
-CREATE PROCEDURE load_data()
-BEGIN
 
-    SELECT '===========================================' AS message;
-    SELECT '       STARTING DATA WAREHOUSE ETL        ' AS message;
-    SELECT '===========================================' AS message;
+-- ============================================================
+-- 3. CRM SALES
+-- ============================================================
+DROP TABLE crm_sales_details;
+CREATE TABLE bronze.crm_sales_details (
+    sls_ord_num    INT,
+    sls_prd_key    VARCHAR(50),
+    sls_cust_id    INT,
+    sls_ord_dt     DATE,
+    sls_ship_dt    DATE,
+    sls_due_dt     DATE,
+    sls_sales      INT,
+    sls_quantity   INT,
+    sls_price      INT
+);
 
-    /* Clear staging tables */
 
-    TRUNCATE TABLE crm_cust_info;
-    TRUNCATE TABLE crm_prd_info;
-    TRUNCATE TABLE crm_sales_details;
+-- ============================================================
+-- 4. ERP CUSTOMER
+-- ============================================================
+DROP TABLE erp_cust_az12;
+CREATE TABLE bronze.erp_cust_az12 (
+    CID    VARCHAR(50),
+    BDATE  DATE,
+    GEN    VARCHAR(50)
+);
 
-    TRUNCATE TABLE erp_cust_az12;
-    TRUNCATE TABLE erp_loc_a101;
-    TRUNCATE TABLE erp_px_cat_g1v2;
 
-    SELECT 'Tables truncated successfully.' AS message;
+-- ============================================================
+-- 5. ERP LOCATION
+-- ============================================================
+DROP TABLE erp_loc_a101;
+CREATE TABLE bronze.erp_loc_a101 (
+    CID    VARCHAR(50),
+    CNTRY  VARCHAR(50)
+);
 
-END $$
 
-DELIMITER ;
+-- ============================================================
+-- 6. ERP PRODUCT CATEGORY
+-- ============================================================
+DROP TABLE erp_px_cat_g1v2;
+CREATE TABLE bronze.erp_px_cat_g1v2 (
+    ID          VARCHAR(50),
+    CAT         VARCHAR(50),
+    SUBCAT      VARCHAR(50),
+    MAINTAINCE  VARCHAR(50)
+);
 
-CALL load_data();
+
+-- ============================================================
+-- LOAD CRM CUSTOMER
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_crm/cust_info.csv'
-INTO TABLE crm_cust_info
+INTO TABLE bronze.crm_cust_info
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+-- ============================================================
+-- LOAD CRM PRODUCT
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_crm/prd_info.csv'
-INTO TABLE crm_prd_info
+INTO TABLE bronze.crm_prd_info
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+-- ============================================================
+-- LOAD CRM SALES
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_crm/sales_details.csv'
-INTO TABLE crm_sales_details
+INTO TABLE bronze.crm_sales_details
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
+
+-- ============================================================
+-- LOAD ERP CUSTOMER
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_erp/CUST_AZ12.csv'
-INTO TABLE erp_cust_az12
+INTO TABLE bronze.erp_cust_az12
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+-- ============================================================
+-- LOAD ERP LOCATION
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_erp/LOC_A101.csv'
-INTO TABLE erp_loc_a101
+INTO TABLE bronze.erp_loc_a101
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+-- ============================================================
+-- LOAD ERP PRODUCT CATEGORY
+-- ============================================================
 
 LOAD DATA LOCAL INFILE
 '/home/hrithik/Desktop/SQL_Proj/sql_dwh_project/source_erp/PX_CAT_G1V2.csv'
-INTO TABLE erp_px_cat_g1v2
+INTO TABLE bronze.erp_px_cat_g1v2
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
-SELECT
-    (SELECT COUNT(*) FROM crm_cust_info)       AS crm_cust_count,
-    (SELECT COUNT(*) FROM crm_prd_info)        AS crm_prd_count,
-    (SELECT COUNT(*) FROM crm_sales_details)   AS crm_sales_count,
-    (SELECT COUNT(*) FROM erp_cust_az12)       AS erp_cust_count,
-    (SELECT COUNT(*) FROM erp_loc_a101)        AS erp_loc_count,
-    (SELECT COUNT(*) FROM erp_px_cat_g1v2)     AS erp_px_cat_count;
+
+-- ============================================================
+-- CHECK ROW COUNTS
+-- ============================================================
+
+SELECT 'crm_cust_info' AS table_name,
+       COUNT(*) AS row_count
+FROM bronze.crm_cust_info
+
+UNION ALL
+
+SELECT 'crm_prd_info',
+       COUNT(*)
+FROM bronze.crm_prd_info
+
+UNION ALL
+
+SELECT 'crm_sales_details',
+       COUNT(*)
+FROM bronze.crm_sales_details
+
+UNION ALL
+
+SELECT 'erp_cust_az12',
+       COUNT(*)
+FROM bronze.erp_cust_az12
+
+UNION ALL
+
+SELECT 'erp_loc_a101',
+       COUNT(*)
+FROM bronze.erp_loc_a101
+
+UNION ALL
+
+SELECT 'erp_px_cat_g1v2',
+       COUNT(*)
+FROM bronze.erp_px_cat_g1v2;
