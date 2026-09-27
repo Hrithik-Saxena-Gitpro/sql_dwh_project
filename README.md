@@ -48,8 +48,8 @@ Here in this the process start with understanding the data and exploring the dat
 ===> Check the consistency of value in low cardinality columns. 
 ===> After this we check for standardization and consistency. 
 
-# Data quality checks 
+### Data quality checks 
 
-### => Remove the unwanted spaces 
-### => Handling missing data and data transformation upper case and lower case
-### => Remover duplicates in the data 
+##### => Remove the unwanted spaces 
+##### => Handling missing data and data transformation upper case and lower case
+##### => Remover duplicates in the data 
